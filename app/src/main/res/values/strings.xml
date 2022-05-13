@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Practica1_HomarMasachsFrancesc_MeninoSuredaPau</string>
+
+    <string-array name="expositors">
+        <item>Expositor1</item>
+        <item>Expositor2</item>
+    </string-array>
+
+    <string-array name="tipologia">
+        <item>Random description</item>
+        <item>Random description</item>
+    </string-array>
+
+    <string-array name="nStand">
+        <item>Numero stand</item>
+        <item>Numero stand</item>
+    </string-array>
 </resources>
