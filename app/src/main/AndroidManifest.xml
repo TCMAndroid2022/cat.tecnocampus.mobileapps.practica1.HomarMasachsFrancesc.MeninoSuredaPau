@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Practica1_HomarMasachsFrancesc_MeninoSuredaPau">
         <activity
+            android:name=".InfoActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Detalls"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
