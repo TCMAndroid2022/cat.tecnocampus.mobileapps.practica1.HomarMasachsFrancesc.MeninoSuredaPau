@@ -7,4 +7,6 @@
     <string name="n_stand">Número stand</string>
     <string name="coordenades">Coordenades</string>
     <string name="guardar">Guardar</string>
+    <string name="obrir_maps">Obrir Google maps</string>
+    <string name="trucar">Trucar</string>
 </resources>

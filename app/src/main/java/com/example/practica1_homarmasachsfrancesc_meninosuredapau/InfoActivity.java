@@ -1,13 +1,20 @@
 package com.example.practica1_homarmasachsfrancesc_meninosuredapau;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +65,7 @@ public class InfoActivity extends AppCompatActivity {
     public void clickButtonMaps(View view) {
 
         try {
-            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=46.414382,10.013988");
+            Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+sCoordenades);
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
@@ -71,7 +78,7 @@ public class InfoActivity extends AppCompatActivity {
     public void clickButtonTrucada(View view) {
         try {
             Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:555-555-555"));
+            intent.setData(Uri.parse("tel:"+sTelefon));
             startActivity(intent);
         }catch(ActivityNotFoundException e)
         {
@@ -86,4 +93,5 @@ public class InfoActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
 }

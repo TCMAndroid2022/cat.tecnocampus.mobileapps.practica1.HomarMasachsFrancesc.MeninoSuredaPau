@@ -54,14 +54,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Button"
-        android:onClick="clickButtonMaps"/>
+        android:onClick="clickButtonMaps"
+        android:text="@string/obrir_maps" />
 
     <Button
         android:id="@+id/buttonTrucada"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Button"
-        android:onClick="clickButtonTrucada"/>
+        android:onClick="clickButtonTrucada"
+        android:text="@string/trucar" />
 </LinearLayout>

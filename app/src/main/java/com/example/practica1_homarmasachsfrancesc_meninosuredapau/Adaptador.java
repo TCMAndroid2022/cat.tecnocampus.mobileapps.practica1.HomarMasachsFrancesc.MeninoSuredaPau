@@ -1,6 +1,8 @@
 package com.example.practica1_homarmasachsfrancesc_meninosuredapau;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
         return new MyViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.expositorsTxt.setText(expositors.get(position).getExpositors());
@@ -50,6 +53,37 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
                 context.startActivity(intent);
             }
         });
+
+        holder.mainLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                        .setTitle("Delete contact")
+                        .setMessage("Are you sure you want to delete?")
+                        .setIcon(R.drawable.ic_baseline_delete_24)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                expositors.remove(holder.getBindingAdapterPosition());
+                                notifyItemRemoved(holder.getBindingAdapterPosition());
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                builder.show();
+
+                return true;
+            }
+        });
+
+
+
     }
 
     @Override
@@ -70,5 +104,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }
     }
+
+
 
 }

@@ -8,4 +8,6 @@
     <string name="n_stand">Número stand</string>
     <string name="telefon">Teléfono</string>
     <string name="tipologia">Tipología</string>
+    <string name="obrir_maps">Abrir Google maps</string>
+    <string name="trucar">Llamar</string>
 </resources>

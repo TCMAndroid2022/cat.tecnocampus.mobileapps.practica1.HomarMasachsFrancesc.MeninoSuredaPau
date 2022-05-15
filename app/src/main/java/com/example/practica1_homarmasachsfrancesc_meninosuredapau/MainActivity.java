@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,36 +13,51 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    static Adaptador adaptador;
     RecyclerView llistaExpositors;
     List<Expositor> expositors;
-    Adaptador adaptador;
+    GridLayoutManager gridLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         llistaExpositors = findViewById(R.id.llistaExpositors);
         expositors = new ArrayList<Expositor>();
         expositors.add(new Expositor("Expositor1", "Random Description", "1", "111222333", "111222333", "12345"));
         expositors.add(new Expositor("Expositor2", "Random Description", "2", "111222333", "111222333", "12345"));
 
-        adaptador = new Adaptador(this, expositors);
+        gridLayoutManager = new GridLayoutManager(this,2);
+
+        if (adaptador==null){
+            adaptador = new Adaptador(this, expositors);
+        }
         llistaExpositors.setAdapter(adaptador);
-        llistaExpositors.setLayoutManager(new LinearLayoutManager(this));
+
+        llistaExpositors.setLayoutManager(gridLayoutManager);
+
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            gridLayoutManager.setSpanCount(2);
+        }else{
+            gridLayoutManager.setSpanCount(1);
+        }
     }
 
     @Override
@@ -67,8 +83,10 @@ public class MainActivity extends AppCompatActivity {
                         Expositor nouExpo = new Expositor(data.getStringExtra("empresa"), data.getStringExtra("tipologia"), data.getStringExtra("nstand"), data.getStringExtra("telefon"), data.getStringExtra("nif"), data.getStringExtra("coordenades"));
                         expositors.add(nouExpo);
                         adaptador.notifyItemInserted(expositors.size()-1);
-                        llistaExpositors.scrollToPosition(expositors.size()-1);
                     }
                 }
             });
+
+
+
 }
