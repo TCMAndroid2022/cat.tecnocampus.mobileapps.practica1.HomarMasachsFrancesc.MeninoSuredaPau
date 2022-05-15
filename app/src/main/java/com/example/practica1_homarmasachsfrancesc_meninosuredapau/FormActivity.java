@@ -3,6 +3,7 @@ package com.example.practica1_homarmasachsfrancesc_meninosuredapau;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -17,5 +18,9 @@ public class FormActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    public void clickSaveButton(View view) {
+
     }
 }

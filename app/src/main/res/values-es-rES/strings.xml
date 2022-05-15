@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Practica1_HomarMasachsFrancesc_MeninoSuredaPau</string>
+    <string name="app_name">Practica1_HomarMasachsFrancesc_MeninoSuredaPau</string>
+    <string name="coordenades">Coordenadas</string>
+    <string name="guardar">Guardar</string>
+    <string name="nif">NIF</string>
+    <string name="nom_empresa">Nombre empresa</string>
+    <string name="n_stand">Número stand</string>
+    <string name="telefon">Teléfono</string>
+    <string name="tipologia">Tipología</string>
+</resources>
