@@ -15,4 +15,16 @@
         <item>Numero stand</item>
         <item>Numero stand</item>
     </string-array>
+    <string-array name="telefon">
+        <item>111222333</item>
+        <item>999888777</item>
+    </string-array>
+    <string-array name="nif">
+        <item>111222333</item>
+        <item>999888777</item>
+    </string-array>
+    <string-array name="coordenades">
+        <item>coordenades 1</item>
+        <item>coordenades 2</item>
+    </string-array>
 </resources>

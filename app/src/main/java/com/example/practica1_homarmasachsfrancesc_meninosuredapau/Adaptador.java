@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
 
     Context context;
-    String[] expositors, tipologia, nStand;
+    List<Expositor> expositors;
 
-    public Adaptador(Context context, String[] expositors, String[] tipologia, String[] nStand) {
+    public Adaptador(Context context, List expositors) {
         this.context = context;
         this.expositors = expositors;
-        this.tipologia = tipologia;
-        this.nStand = nStand;
     }
 
     @NonNull
@@ -33,17 +33,20 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.expositorsTxt.setText(expositors[position]);
-        holder.tipologiaTxt.setText(tipologia[position]);
-        holder.nStandTxt.setText(nStand[position]);
+        holder.expositorsTxt.setText(expositors.get(position).getExpositors());
+        holder.tipologiaTxt.setText(expositors.get(position).getTipologia());
+        holder.nStandTxt.setText(expositors.get(position).getnStand());
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(context, InfoActivity.class);
-                intent.putExtra("expositor",expositors[holder.getBindingAdapterPosition()]);
-                intent.putExtra("tipologia",tipologia[holder.getBindingAdapterPosition()]);
-                intent.putExtra("nStand",nStand[holder.getBindingAdapterPosition()]);
+                intent.putExtra("expositor",expositors.get(holder.getBindingAdapterPosition()).getExpositors());
+                intent.putExtra("tipologia",expositors.get(holder.getBindingAdapterPosition()).getTipologia());
+                intent.putExtra("nStand",expositors.get(holder.getBindingAdapterPosition()).getnStand());
+                intent.putExtra("telefon",expositors.get(holder.getBindingAdapterPosition()).getTelefon());
+                intent.putExtra("nif",expositors.get(holder.getBindingAdapterPosition()).getNif());
+                intent.putExtra("coordenades",expositors.get(holder.getBindingAdapterPosition()).getCoordenades());
                 context.startActivity(intent);
             }
         });
@@ -51,7 +54,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return expositors.length;
+        return expositors.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
