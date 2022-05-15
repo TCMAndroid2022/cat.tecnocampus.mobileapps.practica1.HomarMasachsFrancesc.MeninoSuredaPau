@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Practica1_HomarMasachsFrancesc_MeninoSuredaPau</string>
+    <string name="app_name">cat.tecnocampus.mobileapps.practica1.HomarMasachsFrancesc.MeninoSuredaPau</string>
     <string name="coordenades">Coordenadas</string>
     <string name="guardar">Guardar</string>
     <string name="nif">NIF</string>
