@@ -12,42 +12,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="@string/nom_empresa" />
 
     <TextView
         android:id="@+id/tipologia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="@string/tipologia" />
 
     <TextView
         android:id="@+id/telefon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="@string/telefon" />
 
     <TextView
         android:id="@+id/nif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="@string/nif" />
 
     <TextView
         android:id="@+id/num_parada"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="@string/n_stand" />
 
     <TextView
         android:id="@+id/coordenades"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="@string/coordenades" />
 
     <Button
         android:id="@+id/buttonMaps"
