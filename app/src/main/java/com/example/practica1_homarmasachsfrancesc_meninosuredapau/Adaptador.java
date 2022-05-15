@@ -1,14 +1,21 @@
 package com.example.practica1_homarmasachsfrancesc_meninosuredapau;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,10 +26,12 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
 
     Context context;
     List<Expositor> expositors;
+    OnNoteListener onNoteListener;
 
-    public Adaptador(Context context, List expositors) {
+    public Adaptador(Context context, List expositors, OnNoteListener onNoteListener) {
         this.context = context;
         this.expositors = expositors;
+        this.onNoteListener = onNoteListener;
     }
 
     @NonNull
@@ -30,29 +39,14 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.layout, parent, false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, onNoteListener);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.expositorsTxt.setText(expositors.get(position).getExpositors());
         holder.tipologiaTxt.setText(expositors.get(position).getTipologia());
         holder.nStandTxt.setText(expositors.get(position).getnStand());
-
-        holder.mainLayout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(context, InfoActivity.class);
-                intent.putExtra("expositor",expositors.get(holder.getBindingAdapterPosition()).getExpositors());
-                intent.putExtra("tipologia",expositors.get(holder.getBindingAdapterPosition()).getTipologia());
-                intent.putExtra("nStand",expositors.get(holder.getBindingAdapterPosition()).getnStand());
-                intent.putExtra("telefon",expositors.get(holder.getBindingAdapterPosition()).getTelefon());
-                intent.putExtra("nif",expositors.get(holder.getBindingAdapterPosition()).getNif());
-                intent.putExtra("coordenades",expositors.get(holder.getBindingAdapterPosition()).getCoordenades());
-                context.startActivity(intent);
-            }
-        });
 
         holder.mainLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -91,18 +85,31 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
         return expositors.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView expositorsTxt, tipologiaTxt, nStandTxt;
         ConstraintLayout mainLayout;
+        OnNoteListener onNoteListener;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
             expositorsTxt = itemView.findViewById(R.id.expositorsTxt);
             tipologiaTxt = itemView.findViewById(R.id.tipologiaTxt);
             nStandTxt = itemView.findViewById(R.id.nStandTxt);
             mainLayout = itemView.findViewById(R.id.mainLayout);
+            this.onNoteListener = onNoteListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onNoteListener.onNoteClick(getBindingAdapterPosition());
+        }
+    }
+
+    public interface OnNoteListener{
+        void onNoteClick(int position);
     }
 
 

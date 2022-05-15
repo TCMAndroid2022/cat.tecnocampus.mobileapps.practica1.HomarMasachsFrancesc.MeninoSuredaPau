@@ -26,7 +26,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Adaptador.OnNoteListener {
     static Adaptador adaptador;
     RecyclerView llistaExpositors;
     List<Expositor> expositors;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         gridLayoutManager = new GridLayoutManager(this,2);
 
         if (adaptador==null){
-            adaptador = new Adaptador(this, expositors);
+            adaptador = new Adaptador(this, expositors, this);
         }
         llistaExpositors.setAdapter(adaptador);
 
@@ -88,5 +88,16 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-
+    @Override
+    public void onNoteClick(int position) {
+        expositors.get(position);
+        Intent intent = new Intent(this, InfoActivity.class);
+        intent.putExtra("expositor",expositors.get(position).getExpositors());
+        intent.putExtra("tipologia",expositors.get(position).getTipologia());
+        intent.putExtra("nStand",expositors.get(position).getnStand());
+        intent.putExtra("telefon",expositors.get(position).getTelefon());
+        intent.putExtra("nif",expositors.get(position).getNif());
+        intent.putExtra("coordenades",expositors.get(position).getCoordenades());
+        startActivity(intent);
+    }
 }

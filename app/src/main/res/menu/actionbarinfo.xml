@@ -6,5 +6,6 @@
         android:id="@+id/edit"
         android:icon="@drawable/ic_baseline_edit_24"
         android:title="Item"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:onClick="editForm"/>
 </menu>

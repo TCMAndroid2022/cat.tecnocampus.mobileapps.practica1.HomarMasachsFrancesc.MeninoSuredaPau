@@ -94,4 +94,9 @@ public class InfoActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void editForm(MenuItem item) {
+        sExpositor = "hola";
+        setData();
+
+    }
 }
