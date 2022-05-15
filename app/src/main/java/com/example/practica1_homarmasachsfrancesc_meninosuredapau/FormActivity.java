@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class FormActivity extends AppCompatActivity {
@@ -24,8 +25,20 @@ public class FormActivity extends AppCompatActivity {
         telefon = findViewById(R.id.telefonForm);
         nStand = findViewById(R.id.nStandForm);
         coordenades = findViewById(R.id.coordenadesForm);
+        getData();
     }
 
+    private void getData(){
+        if(getIntent().hasExtra("empresa") && getIntent().hasExtra("tipologia")&& getIntent().hasExtra("nstand")&& getIntent().hasExtra("telefon")&& getIntent().hasExtra("nif")&& getIntent().hasExtra("coordenades")){
+
+            empresa.setText(getIntent().getStringExtra("empresa"), TextView.BufferType.EDITABLE);
+            tipologia.setText(getIntent().getStringExtra("tipologia"), TextView.BufferType.EDITABLE);
+            nif.setText(getIntent().getStringExtra("nif"), TextView.BufferType.EDITABLE);
+            telefon.setText(getIntent().getStringExtra("telefon"), TextView.BufferType.EDITABLE);
+            nStand.setText(getIntent().getStringExtra("nstand"), TextView.BufferType.EDITABLE);
+            coordenades.setText(getIntent().getStringExtra("coordenades"), TextView.BufferType.EDITABLE);
+        }
+    }
     @Override
     public boolean onSupportNavigateUp() {
         finish();

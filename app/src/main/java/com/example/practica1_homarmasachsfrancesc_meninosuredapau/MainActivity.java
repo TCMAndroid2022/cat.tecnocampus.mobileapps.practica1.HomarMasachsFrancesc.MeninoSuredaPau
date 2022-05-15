@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity implements Adaptador.OnNoteL
 
         llistaExpositors = findViewById(R.id.llistaExpositors);
         expositors = new ArrayList<Expositor>();
-        expositors.add(new Expositor("Expositor1", "Random Description", "1", "111222333", "111222333", "12345"));
-        expositors.add(new Expositor("Expositor2", "Random Description", "2", "111222333", "111222333", "12345"));
 
         gridLayoutManager = new GridLayoutManager(this,2);
 
