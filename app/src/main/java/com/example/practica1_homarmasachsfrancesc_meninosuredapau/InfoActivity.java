@@ -24,6 +24,8 @@ public class InfoActivity extends AppCompatActivity {
     TextView expositor, tipologia, nStand, telefon, nif, coordenades;
 
     String sExpositor, sTipologia, sNStand, sTelefon, sNif, sCoordenades;
+    boolean editedForm = false;
+    int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,22 @@ public class InfoActivity extends AppCompatActivity {
         setData();
     }
 
+    public boolean onSupportNavigateUp() {
+        if(editedForm){
+            Intent intent = new Intent();
+            intent.putExtra("empresa", expositor.getText().toString());
+            intent.putExtra("tipologia", tipologia.getText().toString());
+            intent.putExtra("nif", nif.getText().toString());
+            intent.putExtra("telefon", telefon.getText().toString());
+            intent.putExtra("nstand", nStand.getText().toString());
+            intent.putExtra("coordenades", coordenades.getText().toString());
+            intent.putExtra("position", position);
+            setResult(RESULT_OK, intent);
+        }
+        finish();
+        return true;
+    }
+
     private void getData(){
         if(getIntent().hasExtra("expositor") && getIntent().hasExtra("tipologia")&& getIntent().hasExtra("nStand")&& getIntent().hasExtra("telefon")&& getIntent().hasExtra("nif")&& getIntent().hasExtra("coordenades")){
 
@@ -48,6 +66,7 @@ public class InfoActivity extends AppCompatActivity {
             sTelefon = getIntent().getStringExtra("telefon");
             sNif = getIntent().getStringExtra("nif");
             sCoordenades = getIntent().getStringExtra("coordenades");
+            position = getIntent().getIntExtra("position", 9999);
         }else{
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }
@@ -95,8 +114,33 @@ public class InfoActivity extends AppCompatActivity {
     }
 
     public void editForm(MenuItem item) {
-        sExpositor = "hola";
-        setData();
-
+        Intent intent = new Intent(this, FormActivity.class);
+        intent.putExtra("empresa", expositor.getText().toString());
+        intent.putExtra("tipologia", tipologia.getText().toString());
+        intent.putExtra("nif", nif.getText().toString());
+        intent.putExtra("telefon", telefon.getText().toString());
+        intent.putExtra("nstand", nStand.getText().toString());
+        intent.putExtra("coordenades", coordenades.getText().toString());
+        intent.putExtra("position", position);
+        editExpositorActivityResultLauncher.launch(intent);
     }
+
+    ActivityResultLauncher<Intent> editExpositorActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        sExpositor = data.getStringExtra("empresa");
+                        sTipologia = data.getStringExtra("tipologia");
+                        sNif = data.getStringExtra("nif");
+                        sTelefon = data.getStringExtra("telefon");
+                        sNStand = data.getStringExtra("nstand");
+                        sCoordenades = data.getStringExtra("coordenades");
+                        editedForm=true;
+                        setData();
+                    }
+                }
+            });
 }

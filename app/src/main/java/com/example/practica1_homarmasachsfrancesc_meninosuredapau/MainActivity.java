@@ -70,10 +70,10 @@ public class MainActivity extends AppCompatActivity implements Adaptador.OnNoteL
 
     public void openForm(MenuItem item) {
         Intent intent = new Intent(this, FormActivity.class);
-        someActivityResultLauncher.launch(intent);
+        activityResultLauncher.launch(intent);
     }
 
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -98,6 +98,22 @@ public class MainActivity extends AppCompatActivity implements Adaptador.OnNoteL
         intent.putExtra("telefon",expositors.get(position).getTelefon());
         intent.putExtra("nif",expositors.get(position).getNif());
         intent.putExtra("coordenades",expositors.get(position).getCoordenades());
-        startActivity(intent);
+        intent.putExtra("position", position);
+        editExpositorActivityResultLauncher.launch(intent);
     }
+
+    ActivityResultLauncher<Intent> editExpositorActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Expositor nouExpo = new Expositor(data.getStringExtra("empresa"), data.getStringExtra("tipologia"), data.getStringExtra("nstand"), data.getStringExtra("telefon"), data.getStringExtra("nif"), data.getStringExtra("coordenades"));
+                        expositors.set(data.getIntExtra("position",999), nouExpo);
+                        adaptador.notifyItemChanged(expositors.size()-1);
+                        llistaExpositors.setAdapter(adaptador);
+                    }
+                }
+            });
 }
